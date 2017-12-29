@@ -170,3 +170,220 @@ Recommendations API using Neo4j to define related products by categories, brands
 Feel free to get help or suggest alterations on
 [GitHub repo](https://github.com/ecomclub/ecomplus-api-docs) or by e-mail
 [ti@e-com.club](mailto:ti@e-com.club)
+
+## Items [/items.json]
+
+The `items` type has the
+[mapping](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html) above:
+
+```
+'items': {
+  'dynamic_templates': [{
+    'specifications': {
+      'mapping': {
+        'type': 'string',
+        'index': 'not_analyzed'
+      },
+      'match_mapping_type': 'string',
+      'path_match': 'specifications.*'
+    }
+  }, {
+    'variations_specifications': {
+      'mapping': {
+        'type': 'string',
+        'index': 'not_analyzed'
+      },
+      'match_mapping_type': 'string',
+      'path_match': 'variations.specifications.*'
+    }
+  }],
+  'properties': {
+    'date': {
+      'type': 'date'
+    },
+    'sku': {
+      'type': 'string',
+      'index': 'not_analyzed'
+    },
+    'name': {
+      'type': 'string'
+    },
+    'slug': {
+      'type': 'string',
+      'index': 'no'
+    },
+    'permalink': {
+      'type': 'string',
+      'index': 'no'
+    },
+    'mobile_link': {
+      'type': 'string',
+      'index': 'no'
+    },
+    'status': {
+      'type': 'string',
+      'index': 'not_analyzed'
+    },
+    'available': {
+      'type': 'boolean'
+    },
+    'visible': {
+      'type': 'boolean'
+    },
+    'ad_relevance': {
+      'type': 'byte'
+    },
+    'price': {
+      'type': 'float'
+    },
+    'base_price': {
+      'type': 'float'
+    },
+    'currency_id': {
+      'type': 'string',
+      'index': 'no'
+    },
+    'currency_symbol': {
+      'type': 'string',
+      'index': 'no'
+    },
+    'quantity': {
+      'type': 'float'
+    },
+    'measurement': {
+      'enabled': false
+    },
+    'condition': {
+      'type': 'string',
+      'index': 'not_analyzed'
+    },
+    'warranty': {
+      'type': 'string',
+      'index': 'not_analyzed'
+    },
+    'specifications': {
+      'dynamic': true
+    },
+    'pictures': {
+      'enabled': false
+    },
+    'installments': {
+      'enabled': false
+    },
+    'discount': {
+      'enabled': false
+    },
+    'views': {
+      'type': 'integer'
+    },
+    'sales': {
+      'type': 'integer'
+    },
+    'brands': {
+      'properties': {
+        '_id': {
+          'type': 'string',
+          'index': 'not_analyzed'
+        },
+        'name': {
+          'type': 'string',
+          'index': 'not_analyzed'
+        },
+        'slug': {
+          'type': 'string',
+          'index': 'no'
+        }
+      }
+    },
+    'categories': {
+      'properties': {
+        '_id': {
+          'type': 'string',
+          'index': 'not_analyzed'
+        },
+        'name': {
+          'type': 'string',
+          'index': 'not_analyzed'
+        },
+        'slug': {
+          'type': 'string',
+          'index': 'no'
+        }
+      }
+    },
+    'keywords': {
+      'type': 'string'
+    },
+    'variations': {
+      'type': 'nested',
+      'properties': {
+        'sku': {
+          'type': 'string',
+          'index': 'not_analyzed'
+        },
+        'name': {
+          'type': 'string',
+          'index': 'not_analyzed'
+        },
+        'price': {
+          'type': 'float'
+        },
+        'base_price': {
+          'type': 'float'
+        },
+        'specifications': {
+          'dynamic': true
+        },
+        'installments': {
+          'enabled': false
+        },
+        'discount': {
+          'enabled': false
+        },
+        'quantity': {
+          'type': 'float'
+        },
+        'picture_id': {
+          'type': 'string',
+          'index': 'no'
+        }
+      }
+    }
+  }
+}
+```
+
+### Simple Items Search [GET /items.json?q={field}:{value}]
+
+[URI Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html)
+
++ Parameters
+    + field: keywords (string, required) - Valid item property
+    + value: tshirt (string, required) - Value to be searched
+
++ Response 200 (application/json)
+
+        {
+        }
+
+### Complex Items Search [POST]
+
+[Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
+
++ Request (application/json)
+
+    + Headers
+
+            X-Store-ID: 100
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+            }
+
++ Response 200 (application/json)
+
+        {
+        }
