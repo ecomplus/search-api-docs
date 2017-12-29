@@ -171,7 +171,9 @@ Feel free to get help or suggest alterations on
 [GitHub repo](https://github.com/ecomclub/ecomplus-api-docs) or by e-mail
 [ti@e-com.club](mailto:ti@e-com.club)
 
-## Items [/items.json]
+## Group Items
+
+### Items Object Map
 
 The `items` type has the
 [mapping](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html) above:
@@ -353,9 +355,11 @@ The `items` type has the
 }
 ```
 
-### Items Simple Search [GET /items.json?q={field}:{value}]
+### Items Search [/items.json]
 
-[URI Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html)
+#### Simple Search [GET /items.json?q={field}:{value}]
+
+ELS [URI Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html)
 
 + Parameters
     + field: keywords (string, required) - Valid item object property
@@ -366,9 +370,9 @@ The `items` type has the
         {
         }
 
-### Items Complex Search [POST]
+#### Complex Search [POST]
 
-[Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
+ELS [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
 
 + Request (application/json)
 
@@ -388,7 +392,9 @@ The `items` type has the
         {
         }
 
-## Terms [/terms.json]
+## Group Terms
+
+### Terms Object Map
 
 The `terms` type has the
 [mapping](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html) above:
@@ -412,9 +418,11 @@ The `terms` type has the
 }
 ```
 
-### Terms Simple Search [GET /terms.json?q={field}:{value}]
+### Terms Search [/terms.json]
 
-[URI Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html)
+#### Simple Search [GET /terms.json?q={field}:{value}]
+
+ELS [URI Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html)
 
 + Parameters
     + field: `term` (string, required) - Valid term object property
@@ -425,9 +433,9 @@ The `terms` type has the
         {
         }
 
-### Terms Complex Search [POST]
+#### Complex Search [POST]
 
-[Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
+ELS [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
 
 + Request (application/json)
 

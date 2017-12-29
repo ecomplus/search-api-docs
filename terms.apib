@@ -1,4 +1,6 @@
-## Terms [/terms.json]
+## Group Terms
+
+### Terms Object Map
 
 The `terms` type has the
 [mapping](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html) above:
@@ -22,9 +24,11 @@ The `terms` type has the
 }
 ```
 
-### Terms Simple Search [GET /terms.json?q={field}:{value}]
+### Terms Search [/terms.json]
 
-[URI Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html)
+#### Simple Search [GET /terms.json?q={field}:{value}]
+
+ELS [URI Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html)
 
 + Parameters
     + field: `term` (string, required) - Valid term object property
@@ -35,9 +39,9 @@ The `terms` type has the
         {
         }
 
-### Terms Complex Search [POST]
+#### Complex Search [POST]
 
-[Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
+ELS [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
 
 + Request (application/json)
 
