@@ -353,12 +353,12 @@ The `items` type has the
 }
 ```
 
-### Simple Items Search [GET /items.json?q={field}:{value}]
+### Items Simple Search [GET /items.json?q={field}:{value}]
 
 [URI Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html)
 
 + Parameters
-    + field: keywords (string, required) - Valid item property
+    + field: keywords (string, required) - Valid item object property
     + value: tshirt (string, required) - Value to be searched
 
 + Response 200 (application/json)
@@ -366,7 +366,66 @@ The `items` type has the
         {
         }
 
-### Complex Items Search [POST]
+### Items Complex Search [POST]
+
+[Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
+
++ Request (application/json)
+
+    + Headers
+
+            X-Store-ID: 100
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+            }
+
++ Response 200 (application/json)
+
+        {
+        }
+
+## Terms [/terms.json]
+
+The `terms` type has the
+[mapping](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html) above:
+
+```
+'terms': {
+  'properties': {
+    'date': {
+      'type': 'date'
+    },
+    'term': {
+      'type': 'string'
+    },
+    'results': {
+      'type': 'short'
+    },
+    'count': {
+      'type': 'integer'
+    }
+  }
+}
+```
+
+### Terms Simple Search [GET /terms.json?q={field}:{value}]
+
+[URI Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html)
+
++ Parameters
+    + field: `term` (string, required) - Valid term object property
+    + value: `t-shirt` (string, required) - Value to be searched
+
++ Response 200 (application/json)
+
+        {
+        }
+
+### Terms Complex Search [POST]
 
 [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
 

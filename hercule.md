@@ -3,3 +3,5 @@
 :[](overview.apib)
 
 :[](items.apib)
+
+:[](terms.apib)
