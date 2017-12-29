@@ -1,129 +1,216 @@
-## Group Products
+## Items [/items.json]
 
-### Recommended [/products/{_id}/recommended.json]
+The `items` type has the
+[mapping](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html) above:
 
-Takes the defined `_id_` by reference and returns up to 12
-recommended products, selecting the products that was more
-times bought together with the reference product
+```
+'items': {
+  'dynamic_templates': [{
+    'specifications': {
+      'mapping': {
+        'type': 'string',
+        'index': 'not_analyzed'
+      },
+      'match_mapping_type': 'string',
+      'path_match': 'specifications.*'
+    }
+  }, {
+    'variations_specifications': {
+      'mapping': {
+        'type': 'string',
+        'index': 'not_analyzed'
+      },
+      'match_mapping_type': 'string',
+      'path_match': 'variations.specifications.*'
+    }
+  }],
+  'properties': {
+    'date': {
+      'type': 'date'
+    },
+    'sku': {
+      'type': 'string',
+      'index': 'not_analyzed'
+    },
+    'name': {
+      'type': 'string'
+    },
+    'slug': {
+      'type': 'string',
+      'index': 'no'
+    },
+    'permalink': {
+      'type': 'string',
+      'index': 'no'
+    },
+    'mobile_link': {
+      'type': 'string',
+      'index': 'no'
+    },
+    'status': {
+      'type': 'string',
+      'index': 'not_analyzed'
+    },
+    'available': {
+      'type': 'boolean'
+    },
+    'visible': {
+      'type': 'boolean'
+    },
+    'ad_relevance': {
+      'type': 'byte'
+    },
+    'price': {
+      'type': 'float'
+    },
+    'base_price': {
+      'type': 'float'
+    },
+    'currency_id': {
+      'type': 'string',
+      'index': 'no'
+    },
+    'currency_symbol': {
+      'type': 'string',
+      'index': 'no'
+    },
+    'quantity': {
+      'type': 'float'
+    },
+    'measurement': {
+      'enabled': false
+    },
+    'condition': {
+      'type': 'string',
+      'index': 'not_analyzed'
+    },
+    'warranty': {
+      'type': 'string',
+      'index': 'not_analyzed'
+    },
+    'specifications': {
+      'dynamic': true
+    },
+    'pictures': {
+      'enabled': false
+    },
+    'installments': {
+      'enabled': false
+    },
+    'discount': {
+      'enabled': false
+    },
+    'views': {
+      'type': 'integer'
+    },
+    'sales': {
+      'type': 'integer'
+    },
+    'brands': {
+      'properties': {
+        '_id': {
+          'type': 'string',
+          'index': 'not_analyzed'
+        },
+        'name': {
+          'type': 'string',
+          'index': 'not_analyzed'
+        },
+        'slug': {
+          'type': 'string',
+          'index': 'no'
+        }
+      }
+    },
+    'categories': {
+      'properties': {
+        '_id': {
+          'type': 'string',
+          'index': 'not_analyzed'
+        },
+        'name': {
+          'type': 'string',
+          'index': 'not_analyzed'
+        },
+        'slug': {
+          'type': 'string',
+          'index': 'no'
+        }
+      }
+    },
+    'keywords': {
+      'type': 'string'
+    },
+    'variations': {
+      'type': 'nested',
+      'properties': {
+        'sku': {
+          'type': 'string',
+          'index': 'not_analyzed'
+        },
+        'name': {
+          'type': 'string',
+          'index': 'not_analyzed'
+        },
+        'price': {
+          'type': 'float'
+        },
+        'base_price': {
+          'type': 'float'
+        },
+        'specifications': {
+          'dynamic': true
+        },
+        'installments': {
+          'enabled': false
+        },
+        'discount': {
+          'enabled': false
+        },
+        'quantity': {
+          'type': 'float'
+        },
+        'picture_id': {
+          'type': 'string',
+          'index': 'no'
+        }
+      }
+    }
+  }
+}
+```
 
-You should use it to do something like _"who bought it, bought too"_
+### Simple Items Search [GET /items.json?q={field}:{value}]
 
-#### List Recommended Items [GET]
+[URI Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html)
 
 + Parameters
-    + _id: a00000000000000000000000 (string, required) - The product ID
+    + field: keywords (string, required) - Valid item property
+    + value: tshirt (string, required) - Value to be searched
 
 + Response 200 (application/json)
 
         {
-          "results": [
-            {
-              "columns": [
-                "products.id"
-              ],
-              "data": [
-                [
-                  "a00000000000000000000001"
-                ],
-                [
-                  "a00000000000000000000002"
-                ],
-                [
-                  "a00000000000000000000003"
-                ],
-                [
-                  "a00000000000000000000004"
-                ],
-                [
-                  "a00000000000000000000005"
-                ],
-                [
-                  "a00000000000000000000006"
-                ],
-                [
-                  "a00000000000000000000007"
-                ],
-                [
-                  "a00000000000000000000008"
-                ],
-                [
-                  "a00000000000000000000009"
-                ],
-                [
-                  "a0000000000000000000000a"
-                ],
-                [
-                  "a0000000000000000000000b"
-                ],
-                [
-                  "a0000000000000000000000c"
-                ]
-              ]
-            }
-          ],
-          "errors": []
         }
 
-### Related [/products/{_id}/related.json]
+### Complex Items Search [POST]
 
-Takes the defined `_id` by reference and returns up to 12
-related products, selecting the products that have more
-categories in common with the reference product
+[Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
 
-You should use it to do something like _"you can also be interested by"_
++ Request (application/json)
 
-#### List Related Items [GET]
+    + Headers
 
-+ Parameters
-    + _id: a00000000000000000000000 (string, required) - The product ID
+            X-Store-ID: 100
+
++ Response 200 (application/json)
+
+    + Body
+
+            {
+            }
 
 + Response 200 (application/json)
 
         {
-          "results": [
-            {
-              "columns": [
-                "products.id"
-              ],
-              "data": [
-                [
-                  "a00000000000000000000011"
-                ],
-                [
-                  "a00000000000000000000012"
-                ],
-                [
-                  "a00000000000000000000013"
-                ],
-                [
-                  "a00000000000000000000014"
-                ],
-                [
-                  "a00000000000000000000015"
-                ],
-                [
-                  "a00000000000000000000016"
-                ],
-                [
-                  "a00000000000000000000017"
-                ],
-                [
-                  "a00000000000000000000018"
-                ],
-                [
-                  "a00000000000000000000019"
-                ],
-                [
-                  "a0000000000000000000001a"
-                ],
-                [
-                  "a0000000000000000000001b"
-                ],
-                [
-                  "a0000000000000000000001c"
-                ]
-              ]
-            }
-          ],
-          "errors": []
         }
