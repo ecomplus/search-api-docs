@@ -31,12 +31,50 @@ The `terms` type has the
 ELS [URI Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html)
 
 + Parameters
-    + field: `term` (string, required) - Valid term object property
-    + value: `t-shirt` (string, required) - Value to be searched
+    + field: term (string, required) - Valid term object property
+    + value: tshirt (string, required) - Value to be searched
 
 + Response 200 (application/json)
 
         {
+          "took": 1,
+          "timed_out": false,
+          "_shards": {
+            "total" : 6,
+            "successful" : 6,
+            "skipped" : 0,
+            "failed" : 0
+          },
+          "hits": {
+            "total" : 2,
+            "max_score": 1.45,
+            "hits" : [
+              {
+                "_index" : "100",
+                "_type" : "terms",
+                "_id" : "0",
+                "_score": 1.45,
+                "_source" : {
+                  "date": "2017-12-01T10:00:40Z",
+                  "term": "tshirt",
+                  "results": 1,
+                  "count": 1675
+                }
+              },
+              {
+                "_index" : "100",
+                "_type" : "terms",
+                "_id" : "1",
+                "_score": 1.31,
+                "_source" : {
+                  "date": "2018-01-01T01:00:30Z",
+                  "term": "t-shirt",
+                  "results": 2,
+                  "count": 568
+                }
+              }
+            ]
+          }
         }
 
 #### Complex Search [POST]
@@ -54,9 +92,52 @@ ELS [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/referenc
     + Body
 
             {
+              "query": {
+                "term": {
+                  "term": "tshirt"
+                }
+              }
             }
 
 + Response 200 (application/json)
 
         {
+          "took": 1,
+          "timed_out": false,
+          "_shards": {
+            "total" : 6,
+            "successful" : 6,
+            "skipped" : 0,
+            "failed" : 0
+          },
+          "hits": {
+            "total" : 2,
+            "max_score": 1.45,
+            "hits" : [
+              {
+                "_index" : "100",
+                "_type" : "terms",
+                "_id" : "0",
+                "_score": 1.45,
+                "_source" : {
+                  "date": "2017-12-01T10:00:40Z",
+                  "term": "tshirt",
+                  "results": 1,
+                  "count": 1675
+                }
+              },
+              {
+                "_index" : "100",
+                "_type" : "terms",
+                "_id" : "1",
+                "_score": 1.31,
+                "_source" : {
+                  "date": "2018-01-01T01:00:30Z",
+                  "term": "t-shirt",
+                  "results": 2,
+                  "count": 568
+                }
+              }
+            ]
+          }
         }
