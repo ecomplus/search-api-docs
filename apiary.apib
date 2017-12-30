@@ -183,24 +183,54 @@ The `items` type has the
   'dynamic_templates': [{
     'specifications': {
       'mapping': {
-        'type': 'string',
-        'index': 'not_analyzed'
+        'properties': {
+          'text': {
+            'type': 'string',
+            'index': 'no'
+          },
+          'value': {
+            'type': 'string',
+            'index': 'not_analyzed'
+          },
+          'rgb': {
+            'type': 'string',
+            'index': 'not_analyzed'
+          },
+          'external_values': {
+            'type': 'string',
+            'index': 'no'
+          }
+        }
       },
-      'match_mapping_type': 'string',
       'path_match': 'specifications.*'
     }
   }, {
     'variations_specifications': {
       'mapping': {
-        'type': 'string',
-        'index': 'not_analyzed'
+        'properties': {
+          'text': {
+            'type': 'string',
+            'index': 'no'
+          },
+          'value': {
+            'type': 'string',
+            'index': 'not_analyzed'
+          },
+          'rgb': {
+            'type': 'string',
+            'index': 'not_analyzed'
+          },
+          'external_values': {
+            'type': 'string',
+            'index': 'no'
+          }
+        }
       },
-      'match_mapping_type': 'string',
       'path_match': 'variations.specifications.*'
     }
   }],
   'properties': {
-    'date': {
+    'created_at': {
       'type': 'date'
     },
     'sku': {
@@ -237,6 +267,16 @@ The `items` type has the
     },
     'price': {
       'type': 'float'
+    },
+    'price_effective_date': {
+      'properties': {
+        'start': {
+          'type': 'date'
+        },
+        'end': {
+          'type': 'date'
+        }
+      }
     },
     'base_price': {
       'type': 'float'
@@ -330,6 +370,16 @@ The `items` type has the
         'price': {
           'type': 'float'
         },
+        'price_effective_date': {
+          'properties': {
+            'start': {
+              'type': 'date'
+            },
+            'end': {
+              'type': 'date'
+            }
+          }
+        },
         'base_price': {
           'type': 'float'
         },
@@ -368,6 +418,99 @@ ELS [URI Search](https://www.elastic.co/guide/en/elasticsearch/reference/current
 + Response 200 (application/json)
 
         {
+          "took": 1,
+          "timed_out": false,
+          "_shards": {
+            "total": 6,
+            "successful": 6,
+            "skipped": 0,
+            "failed": 0
+          },
+          "hits": {
+            "total": 1,
+            "max_score": 1.3862944,
+            "hits": [
+              {
+                "_index": "100",
+                "_type": "items",
+                "_id": "123a5432109876543210cdef",
+                "_score": 1.3862944,
+                "_source": {
+                  "created_at": "2017-12-01T01:00:30Z",
+                  "sku": "s-MP_2B4",
+                  "name": "Mens Pique Polo Shirt",
+                  "slug": "mens-pique-polo-shirt",
+                  "available": true,
+                  "visible": true,
+                  "ad_relevance": 0,
+                  "views": 1131,
+                  "sales": 25,
+                  "price": 42.9,
+                  "price_effective_date": {
+                    "end": "2018-12-01T10:00:00Z"
+                  },
+                  "base_price": 60,
+                  "quantity": 100,
+                  "condition": "new",
+                  "specifications": {
+                    "age_group": {
+                      "text": "Adult",
+                      "value": "adult"
+                    },
+                    "gender": {
+                      "text": "Male",
+                      "value": "male"
+                    },
+                    "size": {
+                      "text": "Large",
+                      "value": "large"
+                    },
+                    "size_type": {
+                      "text": "Regular",
+                      "value": "regular"
+                    },
+                    "size_system": {
+                      "text": "BR",
+                      "value": "BR"
+                    },
+                    "material": {
+                      "text": "Cotton",
+                      "value": "cotton"
+                    },
+                    "colors": [
+                      {
+                        "text": "Pique",
+                        "rgb": "#ff5b00"
+                      }
+                    ]
+                  },
+                  "keywords": [
+                    "tshirt",
+                    "t-shirt",
+                    "man"
+                  ],
+                  "brands": [
+                    {
+                      "_id": "a10000000000000000000001",
+                      "name": "Shirts Example",
+                      "slug": "shirts-example",
+                      "logo": {
+                        "url": "https://mycdn.com/shirts-example.jpg",
+                        "size": "100x50"
+                      }
+                    }
+                  ],
+                  "categories": [
+                    {
+                      "_id": "f10000000000000000000001",
+                      "name": "Polo Shirts",
+                      "slug": "polo"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         }
 
 #### Complex Search [POST]
@@ -385,11 +528,134 @@ ELS [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/referenc
     + Body
 
             {
+              "query": {
+                "multi_match": {
+                  "query": "tshirt",
+                  "fields": [
+                    "name",
+                    "keywords"
+                  ]
+                },
+                "sort": [
+                  {
+                    "available": true
+                  },
+                  "_score",
+                  {
+                    "ad_relevance": "desc"
+                  },
+                  {
+                    "views": "desc"
+                  }
+                ],
+                "bool": {
+                  "filter": [
+                    {
+                      "term": {
+                        "visible": true
+                      }
+                    }
+                  ]
+                }
+              }
             }
 
 + Response 200 (application/json)
 
         {
+          "took": 1,
+          "timed_out": false,
+          "_shards": {
+            "total": 6,
+            "successful": 6,
+            "skipped": 0,
+            "failed": 0
+          },
+          "hits": {
+            "total": 1,
+            "max_score": 1.3862944,
+            "hits": [
+              {
+                "_index": "100",
+                "_type": "items",
+                "_id": "123a5432109876543210cdef",
+                "_score": 1.3862944,
+                "_source": {
+                  "created_at": "2017-12-01T01:00:30Z",
+                  "sku": "s-MP_2B4",
+                  "name": "Mens Pique Polo Shirt",
+                  "slug": "mens-pique-polo-shirt",
+                  "available": true,
+                  "visible": true,
+                  "ad_relevance": 0,
+                  "views": 1131,
+                  "sales": 25,
+                  "price": 42.9,
+                  "price_effective_date": {
+                    "end": "2018-12-01T10:00:00Z"
+                  },
+                  "base_price": 60,
+                  "quantity": 100,
+                  "condition": "new",
+                  "specifications": {
+                    "age_group": {
+                      "text": "Adult",
+                      "value": "adult"
+                    },
+                    "gender": {
+                      "text": "Male",
+                      "value": "male"
+                    },
+                    "size": {
+                      "text": "Large",
+                      "value": "large"
+                    },
+                    "size_type": {
+                      "text": "Regular",
+                      "value": "regular"
+                    },
+                    "size_system": {
+                      "text": "BR",
+                      "value": "BR"
+                    },
+                    "material": {
+                      "text": "Cotton",
+                      "value": "cotton"
+                    },
+                    "colors": [
+                      {
+                        "text": "Pique",
+                        "rgb": "#ff5b00"
+                      }
+                    ]
+                  },
+                  "keywords": [
+                    "tshirt",
+                    "t-shirt",
+                    "man"
+                  ],
+                  "brands": [
+                    {
+                      "_id": "a10000000000000000000001",
+                      "name": "Shirts Example",
+                      "slug": "shirts-example",
+                      "logo": {
+                        "url": "https://mycdn.com/shirts-example.jpg",
+                        "size": "100x50"
+                      }
+                    }
+                  ],
+                  "categories": [
+                    {
+                      "_id": "f10000000000000000000001",
+                      "name": "Polo Shirts",
+                      "slug": "polo"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
         }
 
 ## Group Terms
@@ -425,12 +691,50 @@ The `terms` type has the
 ELS [URI Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html)
 
 + Parameters
-    + field: `term` (string, required) - Valid term object property
-    + value: `t-shirt` (string, required) - Value to be searched
+    + field: term (string, required) - Valid term object property
+    + value: tshirt (string, required) - Value to be searched
 
 + Response 200 (application/json)
 
         {
+          "took": 1,
+          "timed_out": false,
+          "_shards": {
+            "total": 6,
+            "successful": 6,
+            "skipped": 0,
+            "failed": 0
+          },
+          "hits": {
+            "total": 2,
+            "max_score": 1.45,
+            "hits": [
+              {
+                "_index": "100",
+                "_type": "terms",
+                "_id": "0",
+                "_score": 1.45,
+                "_source": {
+                  "date": "2017-12-01T10:00:40Z",
+                  "term": "tshirt",
+                  "results": 1,
+                  "count": 1675
+                }
+              },
+              {
+                "_index": "100",
+                "_type": "terms",
+                "_id": "1",
+                "_score": 1.31,
+                "_source": {
+                  "date": "2018-01-01T01:00:30Z",
+                  "term": "t-shirt",
+                  "results": 2,
+                  "count": 568
+                }
+              }
+            ]
+          }
         }
 
 #### Complex Search [POST]
@@ -448,9 +752,52 @@ ELS [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/referenc
     + Body
 
             {
+              "query": {
+                "term": {
+                  "term": "tshirt"
+                }
+              }
             }
 
 + Response 200 (application/json)
 
         {
+          "took": 1,
+          "timed_out": false,
+          "_shards": {
+            "total": 6,
+            "successful": 6,
+            "skipped": 0,
+            "failed": 0
+          },
+          "hits": {
+            "total": 2,
+            "max_score": 1.45,
+            "hits": [
+              {
+                "_index": "100",
+                "_type": "terms",
+                "_id": "0",
+                "_score": 1.45,
+                "_source": {
+                  "date": "2017-12-01T10:00:40Z",
+                  "term": "tshirt",
+                  "results": 1,
+                  "count": 1675
+                }
+              },
+              {
+                "_index": "100",
+                "_type": "terms",
+                "_id": "1",
+                "_score": 1.31,
+                "_source": {
+                  "date": "2018-01-01T01:00:30Z",
+                  "term": "t-shirt",
+                  "results": 2,
+                  "count": 568
+                }
+              }
+            ]
+          }
         }
