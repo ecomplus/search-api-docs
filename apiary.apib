@@ -180,55 +180,6 @@ The `items` type has the
 
 ```
 'items': {
-  'dynamic_templates': [{
-    'specifications': {
-      'mapping': {
-        'properties': {
-          'text': {
-            'type': 'string',
-            'index': 'no'
-          },
-          'value': {
-            'type': 'string',
-            'index': 'not_analyzed'
-          },
-          'rgb': {
-            'type': 'string',
-            'index': 'not_analyzed'
-          },
-          'external_values': {
-            'type': 'string',
-            'index': 'no'
-          }
-        }
-      },
-      'path_match': 'specifications.*'
-    }
-  }, {
-    'variations_specifications': {
-      'mapping': {
-        'properties': {
-          'text': {
-            'type': 'string',
-            'index': 'no'
-          },
-          'value': {
-            'type': 'string',
-            'index': 'not_analyzed'
-          },
-          'rgb': {
-            'type': 'string',
-            'index': 'not_analyzed'
-          },
-          'external_values': {
-            'type': 'string',
-            'index': 'no'
-          }
-        }
-      },
-      'path_match': 'variations.specifications.*'
-    }
-  }],
   'properties': {
     'created_at': {
       'type': 'date'
@@ -303,8 +254,18 @@ The `items` type has the
       'type': 'string',
       'index': 'not_analyzed'
     },
-    'specifications': {
-      'dynamic': true
+    'specs': {
+      'type': 'nested',
+      'properties': {
+        'key': {
+          'type': 'string',
+          'index': 'not_analyzed'
+        },
+        'value': {
+          'type': 'string',
+          'index': 'not_analyzed'
+        }
+      }
     },
     'pictures': {
       'enabled': false
@@ -382,9 +343,6 @@ The `items` type has the
         },
         'base_price': {
           'type': 'float'
-        },
-        'specifications': {
-          'dynamic': true
         },
         'installments': {
           'enabled': false
