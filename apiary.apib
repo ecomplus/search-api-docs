@@ -257,11 +257,11 @@ The `items` type has the
     'specs': {
       'type': 'nested',
       'properties': {
-        'key': {
+        'grid': {
           'type': 'string',
           'index': 'not_analyzed'
         },
-        'value': {
+        'text': {
           'type': 'string',
           'index': 'not_analyzed'
         }
@@ -366,9 +366,6 @@ The `items` type has the
 Note that the item object is similar to the
 [Product Object](https://ecomstore.docs.apiary.io/#reference/products/product-object),
 but with less properties and converting `specifications` object to `specs` array of nested objects
-
-On each _spec_, the `key` is the name of the specification, and the `value` is
-the **text** property from the specification object
 
 ### Items Search [/items.json]
 
