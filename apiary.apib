@@ -178,7 +178,7 @@ Feel free to get help or suggest alterations on
 The `items` type has the
 [mapping](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html) above:
 
-```
+```javascript
 'items': {
   'properties': {
     'created_at': {
@@ -193,7 +193,7 @@ The `items` type has the
     },
     'slug': {
       'type': 'string',
-      'index': 'no'
+      'index': 'not_analyzed'
     },
     'permalink': {
       'type': 'string',
@@ -215,6 +215,14 @@ The `items` type has the
     },
     'ad_relevance': {
       'type': 'byte'
+    },
+    'ad_type': {
+      'type': 'string',
+      'index': 'not_analyzed'
+    },
+    'short_description': {
+      'type': 'string',
+      'index': 'no'
     },
     'price': {
       'type': 'float'
@@ -294,7 +302,7 @@ The `items` type has the
         },
         'slug': {
           'type': 'string',
-          'index': 'no'
+          'index': 'not_analyzed'
         }
       }
     },
@@ -310,7 +318,7 @@ The `items` type has the
         },
         'slug': {
           'type': 'string',
-          'index': 'no'
+          'index': 'not_analyzed'
         }
       }
     },
