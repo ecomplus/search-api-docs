@@ -185,27 +185,24 @@ The `items` type has the
       'type': 'date'
     },
     'sku': {
-      'type': 'string',
-      'index': 'not_analyzed'
+      'type': 'keyword'
     },
     'name': {
-      'type': 'string'
+      'type': 'text'
     },
     'slug': {
-      'type': 'string',
-      'index': 'not_analyzed'
+      'type': 'keyword'
     },
     'permalink': {
-      'type': 'string',
-      'index': 'no'
+      'type': 'keyword',
+      'index': false
     },
     'mobile_link': {
-      'type': 'string',
-      'index': 'no'
+      'type': 'keyword',
+      'index': false
     },
     'status': {
-      'type': 'string',
-      'index': 'not_analyzed'
+      'type': 'keyword'
     },
     'available': {
       'type': 'boolean'
@@ -217,12 +214,11 @@ The `items` type has the
       'type': 'byte'
     },
     'ad_type': {
-      'type': 'string',
-      'index': 'not_analyzed'
+      'type': 'keyword'
     },
     'short_description': {
-      'type': 'string',
-      'index': 'no'
+      'type': 'text',
+      'index': false
     },
     'price': {
       'type': 'float'
@@ -241,12 +237,12 @@ The `items` type has the
       'type': 'float'
     },
     'currency_id': {
-      'type': 'string',
-      'index': 'no'
+      'type': 'keyword',
+      'index': false
     },
     'currency_symbol': {
-      'type': 'string',
-      'index': 'no'
+      'type': 'keyword',
+      'index': false
     },
     'quantity': {
       'type': 'float'
@@ -255,23 +251,19 @@ The `items` type has the
       'enabled': false
     },
     'condition': {
-      'type': 'string',
-      'index': 'not_analyzed'
+      'type': 'keyword'
     },
     'warranty': {
-      'type': 'string',
-      'index': 'not_analyzed'
+      'type': 'keyword'
     },
     'specs': {
       'type': 'nested',
       'properties': {
         'grid': {
-          'type': 'string',
-          'index': 'not_analyzed'
+          'type': 'keyword'
         },
         'text': {
-          'type': 'string',
-          'index': 'not_analyzed'
+          'type': 'keyword'
         }
       }
     },
@@ -293,48 +285,41 @@ The `items` type has the
     'brands': {
       'properties': {
         '_id': {
-          'type': 'string',
-          'index': 'not_analyzed'
+          'type': 'keyword'
         },
         'name': {
-          'type': 'string',
-          'index': 'not_analyzed'
+          'type': 'keyword'
         },
         'slug': {
-          'type': 'string',
-          'index': 'not_analyzed'
+          'type': 'keyword'
         }
       }
     },
     'categories': {
       'properties': {
         '_id': {
-          'type': 'string',
-          'index': 'not_analyzed'
+          'type': 'keyword'
         },
         'name': {
-          'type': 'string',
-          'index': 'not_analyzed'
+          'type': 'keyword'
         },
         'slug': {
-          'type': 'string',
-          'index': 'not_analyzed'
+          'type': 'keyword'
         }
       }
     },
     'keywords': {
-      'type': 'string'
+      'type': 'text'
     },
+    // map variations as product nested object
     'variations': {
       'type': 'nested',
       'properties': {
         'sku': {
-          'type': 'string',
-          'index': 'not_analyzed'
+          'type': 'keyword'
         },
         'name': {
-          'type': 'string',
-          'index': 'not_analyzed'
+          'type': 'keyword'
         },
         'price': {
           'type': 'float'
@@ -362,8 +347,8 @@ The `items` type has the
           'type': 'float'
         },
         'picture_id': {
-          'type': 'string',
-          'index': 'no'
+          'type': 'keyword',
+          'index': false
         }
       }
     }
@@ -631,14 +616,14 @@ ELS [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/referenc
 The `terms` type has the
 [mapping](https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html) above:
 
-```
+```javascript
 'terms': {
   'properties': {
     'date': {
       'type': 'date'
     },
     'term': {
-      'type': 'string'
+      'type': 'text'
     },
     'results': {
       'type': 'short'
