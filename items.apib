@@ -309,26 +309,16 @@ ELS [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/referenc
 
             {
               "query": {
-                "multi_match": {
-                  "query": "tshirt",
-                  "fields": [
-                    "name",
-                    "keywords"
-                  ]
-                },
-                "sort": [
-                  {
-                    "available": true
-                  },
-                  "_score",
-                  {
-                    "ad_relevance": "desc"
-                  },
-                  {
-                    "views": "desc"
-                  }
-                ],
                 "bool": {
+                  "must": {
+                    "multi_match": {
+                      "query": "tshirt",
+                      "fields": [
+                        "name",
+                        "keywords"
+                      ]
+                    }
+                  },
                   "filter": [
                     {
                       "term": {
@@ -337,7 +327,25 @@ ELS [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/referenc
                     }
                   ]
                 }
-              }
+              },
+              "sort": [
+                {
+                  "available": {
+                    "order": "desc"
+                  }
+                },
+                "_score",
+                {
+                  "ad_relevance": {
+                    "order": "desc"
+                  }
+                },
+                {
+                  "views": {
+                    "order": "desc"
+                  }
+                }
+              ]
             }
 
 + Response 200 (application/json)
