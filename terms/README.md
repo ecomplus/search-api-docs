@@ -23,5 +23,3 @@ The `terms` type has the
   }
 }
 ```
-
-### Terms Search [/terms.json]
