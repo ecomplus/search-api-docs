@@ -15,5 +15,5 @@ chmod +x build.sh
 ./build.sh
 ```
 
-# Online documentation
+# Apiary version
 https://ecomsearch.docs.apiary.io/#
