@@ -12,4 +12,4 @@ function traverse() {
   hercule $1/.hercule.md -o $1/apiary.apib
 }
 
-traverse "./dist"
+traverse "./src"
