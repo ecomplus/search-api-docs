@@ -1,3 +1,5 @@
+## Group Items
+
 ### Items Object Map
 
 The `items` type has the
@@ -184,3 +186,5 @@ The `items` type has the
 Note that the item object is similar to the
 [Product Object](https://ecomstore.docs.apiary.io/#reference/products/product-object),
 but with less properties and converting `specifications` object to `specs` array of nested objects
+
+### Items Search [/items.json]

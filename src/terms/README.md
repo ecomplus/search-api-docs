@@ -1,3 +1,5 @@
+## Group Terms
+
 ### Terms Object Map
 
 The `terms` type has the
@@ -21,3 +23,5 @@ The `terms` type has the
   }
 }
 ```
+
+### Terms Search [/terms.json]
