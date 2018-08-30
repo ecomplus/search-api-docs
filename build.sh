@@ -12,4 +12,4 @@ function traverse() {
   done
 }
 
-traverse "./docs"
+traverse "./dist"
