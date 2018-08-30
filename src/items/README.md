@@ -193,10 +193,10 @@ but with less properties and converting `specifications` object to `specs` array
 
 ELS [URI Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html)
 
-:[Request sample](.simple-search.apib)
+:[](.simple-search.apib)
 
 #### Complex Search [POST]
 
 ELS [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
 
-:[Request sample](.complex-search.apib)
+:[](.complex-search.apib)
