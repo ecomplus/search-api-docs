@@ -1,5 +1,3 @@
-## Group Items
-
 ### Items Object Map
 
 The `items` type has the
