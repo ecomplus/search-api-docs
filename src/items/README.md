@@ -186,3 +186,17 @@ The `items` type has the
 Note that the item object is similar to the
 [Product Object](https://ecomstore.docs.apiary.io/#reference/products/product-object),
 but with less properties and converting `specifications` object to `specs` array of nested objects
+
+### Items Search [/items.json]
+
+#### Simple Search [GET /items.json?q={field}:{value}]
+
+ELS [URI Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html)
+
+:[Request sample](.simple-search.apib)
+
+#### Complex Search [POST]
+
+ELS [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
+
+:[Request sample](.complex-search.apib)

@@ -23,3 +23,17 @@ The `terms` type has the
   }
 }
 ```
+
+### Terms Search [/terms.json]
+
+#### Simple Search [GET /terms.json?q={field}:{value}]
+
+ELS [URI Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-uri-request.html)
+
+:[Request sample](.simple-search.apib)
+
+#### Complex Search [POST]
+
+ELS [Request Body Search](https://www.elastic.co/guide/en/elasticsearch/reference/current/search-request-body.html)
+
+:[Request sample](.complex-search.apib)

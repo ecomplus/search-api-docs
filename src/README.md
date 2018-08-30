@@ -1,3 +1,6 @@
+FORMAT: 1A
+HOST: https://apx-search.e-com.plus/api/v1/
+
 # E-Com Plus Search API
 
 [E-Com Plus](https://www.e-com.plus)
@@ -167,3 +170,7 @@ Recommendations API using Neo4j to define related products by categories, brands
 Feel free to get help or suggest alterations on
 [GitHub repo](https://github.com/ecomclub/ecomplus-api-docs) or by e-mail
 [ti@e-com.club](mailto:ti@e-com.club)
+
+:[Reference: Items](items/apiary.apib)
+
+:[Reference: Terms](terms/apiary.apib)
