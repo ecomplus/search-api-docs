@@ -19,4 +19,3 @@ chmod +x build.sh
 https://developers.e-com.plus/reference/search
 
 https://ecomsearch.docs.apiary.io/#
-([Apiary](https://github.com/apiaryio) version)
