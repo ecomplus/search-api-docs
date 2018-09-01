@@ -171,6 +171,6 @@ Feel free to get help or suggest alterations on
 [GitHub repo](https://github.com/ecomclub/ecomplus-api-docs) or by e-mail
 [ti@e-com.club](mailto:ti@e-com.club)
 
-:[](items/doc.apib)
+:[](items/blueprint.apib)
 
-:[](terms/doc.apib)
+:[](terms/blueprint.apib)
