@@ -18,4 +18,4 @@ chmod +x build.sh
 # Online documentation
 https://developers.e-com.plus/reference/search
 
-https://ecomsearch.docs.apiary.io/#
+https://ecomsearch.docs.apiary.io/
